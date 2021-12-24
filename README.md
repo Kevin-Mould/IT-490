@@ -1,3 +1,19 @@
+## Movie Information Project
+
+This project allows anyone to search for a Movie or TV Series and receive relevant information such as the plot, actors, directors, runtime, IMDB ratings and more. The goal is to entice customers to register for an account to unlock additional customized features, such as: 
+- The ability to manage a friends list 
+- Like or dislike movies and TV shows 
+- Schedule a watch party with friends through google calander 
+- Build out a profile page
+- Receive new movie and TV series recommendations based on the account's recent searches or interactions. 
+
+This project is divided into 3 parts: Front-End, Back-End and DMZ API
+1. The customer interacts with the Front-End and generates requests such as movie queries or login authentications. All requests are sent through a RabbitMQ messaging broker to prevent direct access between the Front-end and Back-End MySQL Database.
+2. The Back-End MySQL Database consumes RabbitMQ messages and performs SQL queries to process requests. 
+3. If a customer queries for a movie not found in the MySQL Database, the DMZ API Server makes an API call to obtain the latest information about the movie.  
+
+For example: A customer requests information about the movie "Cars 2". The Front-End produces a RabbitMQ message that is consumed by the Back-End. The Back-End MySQL Database receives the request to lookup Cars 2. It first checks if Cars 2 is in its local Movie table. If Cars 2 is found, the movie information is returned to the Front-End via RabbitMQ. If Cars 2 is not in the MySQL database, the Back-End produces an API RabbitMQ message that is consumed by the DMZ API Server. The DMZ API Server makes an OMDB API call to obtain information about Cars 2 and returns the information to the Back-End. The Back-End MySQL Database creates a new movie and inserts the API information into the Database. If another customer searches for Cars 2, the Database will return its local movie information and not make another API call.
+
 ## Environment Structure
 
 1. Production Environment
@@ -7,17 +23,14 @@
       - Standby Failover
     - DMZ
       - Standby Failover
-    
 2. Quality Assurance Environment
    - Front End
    - Back End
    - DMZ
-  
 3. Development Environment
    - Front End
    - Back End
    - DMZ
-  
 4. Deployment Server
 
 ## Prerequisites

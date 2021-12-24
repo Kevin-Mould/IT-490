@@ -1,9 +1,9 @@
-## Movie Information Project
+## Movie Information Service
 
-This project allows anyone to search for a Movie or TV Series and receive relevant information such as the plot, actors, directors, runtime, IMDB ratings and more. The goal is to entice customers to register for an account to unlock additional customized features, such as: 
+This service allows anyone to search for a Movie or TV Series and receive relevant information such as the plot, actors, directors, runtime, IMDB ratings and more. The goal is to entice customers to register for an account to unlock additional customized features, such as: 
 - The ability to manage a friends list 
 - Like or dislike movies and TV shows 
-- Schedule a watch party with friends through google calander 
+- Schedule a watch party with friends through google calendar 
 - Build out a profile page
 - Receive new movie and TV series recommendations based on the account's recent searches or interactions. 
 
